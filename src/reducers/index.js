@@ -1,9 +1,7 @@
-import {combineReducers} from 'redux';
-import cellReducers from './cellReducers'
-import isLoadingReducers from './isLoadingReducer'
+// import {combineReducers} from 'redux';
 
-export default combineReducers ({
 
-        cellReducers,
-        isLoadingReducers
-});
+// export default combineReducers ({
+
+       
+// });

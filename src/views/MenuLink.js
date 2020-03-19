@@ -1,5 +1,5 @@
 import React from 'react'
-import {NavLink,Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 const MenuLink = () => {
     return (
@@ -16,28 +16,37 @@ const MenuLink = () => {
                     </NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink to="/members" className="nav-link"  >
+                    <NavLink to="/users" className="nav-link"  >
                         {/* <i className="nav-icon fas fa-th"></i> */}
                         <i className="fa fa-user"></i> &nbsp;
                         <p>
-                         Members
+                         Registered Users
                         <span className="right badge badge-danger" >50</span>
                         </p>
                     </NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink to="/executives" className="nav-link" >
+                    <NavLink to="/products" className="nav-link"  >
                         {/* <i className="nav-icon fas fa-th"></i> */}
-                        <i className="fa fa-user-tie"></i> &nbsp;
+                        <i className="fa fa-user"></i> &nbsp;
                         <p>
-                         Executive
-                        <span className="right badge badge-danger" >4</span>
+                         All Products
+                        <span className="right badge badge-danger" >50</span>
                         </p>
                     </NavLink>
                 </li>
                 <li className="nav-item">
+                    <NavLink to="/categories" className="nav-link" >
+                        <i className="fa fa-user-tie"></i> &nbsp;
+                        <p>
+                         Product Categories
+                        <span className="right badge badge-danger" >4</span>
+                        </p>
+                    </NavLink>
+                </li>
+
+                {/* <li className="nav-item">
                     <NavLink to="/dresscode" className="nav-link"  >
-                        {/* <i className="nav-icon fas fa-th"></i> */}
                         <i className="fa fa-tshirt"></i> &nbsp;
                         <p>
                          Dress Code Schedule
@@ -46,7 +55,6 @@ const MenuLink = () => {
                 </li>
                 <li className="nav-item">
                     <NavLink to="/songs" className="nav-link" >
-                        {/* <i className="nav-icon fas fa-th"></i> */}
                         <i className="fa fa-music"></i> &nbsp;
                         <p>
                          Song Schedule
@@ -56,7 +64,6 @@ const MenuLink = () => {
                 </li>
                 <li className="nav-item">
                     <NavLink to="/finance" className="nav-link" >
-                        {/* <i className="nav-icon fas fa-th"></i> */}
                         <i className="fas fa-dollar-sign"></i> &nbsp;
                         <p>
                          Financial Record
@@ -65,7 +72,6 @@ const MenuLink = () => {
                 </li>
                 <li className="nav-item">
                     <NavLink to="/department" className="nav-link" >
-                        {/* <i className="nav-icon fas fa-th"></i> */}
                         <i className="fas fa-archway"></i> &nbsp;
                         <p>
                          Department Unit
@@ -75,15 +81,15 @@ const MenuLink = () => {
                 </li>
                 <li className="nav-item">
                     <NavLink to="/event" className="nav-link" >
-                        {/* <i className="nav-icon fas fa-th"></i> */}
                         <i className="fas fa-calendar"></i> &nbsp;
                         <p>
                          Upcoming Events
                         <span className="right badge badge-danger" >5</span>
                         </p>
                     </NavLink>
-                </li>
-                <li className="nav-item has-treeview menu-open">
+                </li> */}
+
+                {/* <li className="nav-item has-treeview menu-open">
                 <Link to="#" className="nav-link" >
                     <i className="fas fa-cog"></i>&nbsp;
                     <p>
@@ -106,8 +112,8 @@ const MenuLink = () => {
                     </li>
                     <li className="nav-item">
                     </li>
-                </ul>
-                </li>
+                  </ul>
+                </li> */}
             </ul>
         </React.Fragment>
     )
