@@ -21,13 +21,15 @@ class Categories extends Component {
     
         this.state = {
              data:[],
+             id:"",
              description:"",
              categoryName:"",
              modal:false,
              loadedTable:true,
              alert:null,
              errors:{},
-             formSubmitting:false
+             formSubmitting:false,
+             isEdit:false
 
         }
 
@@ -54,14 +56,50 @@ getCategories(){
         })
     }
 
+getSingleCategory(id){
+    axios.get(`${BASE_URL}/categories/${id}`)
+    .then(res=>{
+
+        this.setState({
+            id:res.data.data.content.id,
+            categoryName:res.data.data.content.name,
+            description:res.data.data.content.description,
+        })
+    })
+}
+
+editModal= async(id)=> {
+
+        await this.getSingleCategory(id)
+        this.setState({
+            isEdit:true
+        })
+        setTimeout(()=>{
+            this.toggle()
+        },500)
+}
+
 toggle=()=>{
     this.setState(prevState=>({
 
         modal:!prevState.modal,
+        
 
     }))
+    
     this.validator.hideMessages()
+    this.resetStateData()
 
+
+}
+
+closeToggle = ()=>{
+
+    this.setState({
+
+        modal:false,
+        isEdit:false
+    })
 }
 
 noDataIndication = ()=> {
@@ -168,6 +206,9 @@ resetStateData(){
 }
 
 
+
+
+
 render() {
 
         const {
@@ -175,7 +216,8 @@ render() {
             description,
             categoryName,
             loadedTable,
-            formSubmitting
+            formSubmitting,
+            isEdit
         } = this.state
 
 
@@ -222,12 +264,23 @@ render() {
             totalSize:this.state.totalSize,
 
             };
+
+        const rowEvents = {
+
+                onClick: (e, row) => {
+        
+                      e.preventDefault()
+                    //   alert(row.id)
+                    this.editModal(row.id)
+                }
+        
+            };
     
             const rowStyle = { 
                 cursor:'pointer',
             };
                             
-        const closeBtn = <button className="close" onClick={this.toggle}>&times;</button>;
+        const closeBtn = <button className="close" onClick={this.closeToggle}>&times;</button>;
     
         return (
             <React.Fragment>
@@ -255,6 +308,7 @@ render() {
                                 overlay={ overlayFactory({ spinner: true, background: 'rgba(192,192,192,0.3)' }) }
                                 rowStyle = {rowStyle}
                                 loading={loadedTable}
+                                rowEvents={rowEvents}
                                 />
                             </CardBody>
                         </Card>
@@ -270,10 +324,10 @@ render() {
                  >
                         <ModalHeader 
                         toggle={this.toggle} 
-                        close={closeBtn}
+                        close={formSubmitting?"Loading...":closeBtn}
                         cssModule={{'modal-title': 'w-100 text-center'}}
                         >
-                            New Category
+                            {isEdit?"Edit Category":"New Category"}
                         </ModalHeader>
                         <ModalBody>
                             <Row>
@@ -304,6 +358,15 @@ render() {
                             </Row>
                         </ModalBody>
                         <ModalFooter>
+                            {isEdit?
+                            <Button
+                             color="success"
+                             block
+                             onClick={this.onEditFinal}
+                            >
+                               {formSubmitting?<FormSpinner/>:" Update"}
+                            </Button>
+                            :
                             <Button
                              color="success"
                              block
@@ -311,6 +374,7 @@ render() {
                             >
                                {formSubmitting?<FormSpinner/>:" Create"}
                             </Button>
+                            }
                         </ModalFooter>
                 </Modal>
 
